@@ -1,0 +1,20 @@
+acceptor
+<form name="first" method="Post" action="donor1.php">
+<?php
+include('conn.php');
+if(isset($_REQUEST["Send"]))
+{
+$p1=$_REQUEST["fa"];
+$p2=$_REQUEST["aa"];
+$p3=$_REQUEST["ga"];
+$p4=$_REQUEST["bga"];
+$p5=$_REQUEST["ca"];
+$p6=$_REQUEST["aa"];
+$p7=$_REQUEST["ea"];
+$p8=$_REQUEST["cna"];
+$p9=$_REQUEST["pa"];
+$p10=$_REQUEST["ida"];
+mysql_query("insert into iet values('$p1',$p2,'$p3',$p4,'$p5','$p6','$p7','$p8','$p9','$p10')");
+
+}
+?>

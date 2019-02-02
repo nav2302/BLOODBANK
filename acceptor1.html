@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Blood bank management</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.95.1/css/materialize.min.css">
+  <!--[if IE 7]>
+    <link rel="stylesheet" href="css/ie7.css" type="text/css">
+  <![endif]-->
+</head>
+<body>
+  <div id="header">
+    <div>
+      <div>
+        <span>Save a life give blood...</span>
+        <a href="index.html" class="logo"><img src="images/logo.png" alt=""></a>
+        <span class="tagline">Experience life to the fullest.</span>
+      </div>
+      <ul>
+        <li>
+          <a href="index.html">home</a>
+        </li>
+        <li>
+          <a href="about.html">about</a>
+        </li>
+      
+        <li>
+          <a href="donor.html">donor</a>
+        </li>
+        <li class="selected">
+          <a href="#">acceptor</a>
+        </li>
+        <li>
+          <a href="receptionist.html">admin</a>
+        </li>
+        <li>
+          <a href="camps.html">camp</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+    <div id="body">
+    <div class="content">
+      <div id="section">
+        <h2>fill the form</h2>
+  <form action="acceptor_php.php" method="post" class="col s8 offset-s2">
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" id="message" name="fname" class="materialize-textarea">
+        <label>Name:&nbsp</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="number" id="message1" name="age" class="materialize-textarea">
+        <label>Age:&nbsp</label>
+      </div>
+    </div>
+    
+  <div class="row">
+      <div class="input-field col s12">
+        <input type="text" id="message2" name="gender" class="materialize-textarea">
+        <label>Gender:&nbsp</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" id="message3" name="bg" class="materialize-textarea">
+        <label>Blood Group:&nbsp</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" id="message4" name="cname" class="materialize-textarea">
+        <label>Consultants name:&nbsp</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" id="message5" name="add" class="materialize-textarea">
+        <label>Address:&nbsp</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="email" id="message6" name="email" class="materialize-textarea">
+        <label>Email:&nbsp</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="number" id="message7" name="cno" class="materialize-textarea">
+        <label>Contact number:&nbsp</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="password" id="message8" name="password" class="materialize-textarea">
+        <label>Password:&nbsp</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" id="message9" name="id" class="materialize-textarea">
+        <label>Id:&nbsp</label>
+      </div>
+    </div>
+    <br>
+          <input type="submit" name="submit" id="submit">
+        <br>
+    <a href="#" id="speak" class="waves-effect waves-light btn">Speak</a>
+  </form>
+
+
+<div id="modal1" class="modal">
+  <h4>Speech Synthesis not supported</h4>
+  <p>Your browser does not support speech synthesis.</p>
+  <p>We recommend you use Google Chrome.</p>
+  <div class="action-bar">
+    <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Close</a>
+  </div>
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.95.1/js/materialize.min.js"></script>
+<script type="text/javascript">
+  $(function(){
+  if ('speechSynthesis' in window) {
+    speechSynthesis.onvoiceschanged = function() {
+      var $voicelist = $('#voices');
+
+      if($voicelist.find('option').length == 0) {
+        speechSynthesis.getVoices().forEach(function(voice, index) {
+          var $option = $('<option>')
+          .val(index)
+          .html(voice.name + (voice.default ? ' (default)' :''));
+
+          $voicelist.append($option);
+        });
+
+        $voicelist.material_select();
+      }
+    }
+
+    $('#speak').click(function(){
+      var text = "Your name is "+$('#message').val();
+      var text1 = "     Your age is" + $('#message1').val();
+      var text2 = " Your Gender is "+ $('#message2').val();
+      var text3 = "  Your blood group given is   "+$('#message3').val();
+      var text4 = " Your consultant name is "+$('#message4').val();
+      var text5 = "Your current address is "+$('#message5').val();
+      var text6 = " YOur email id is"+$('#message6').val();
+      var text7 = " Your contact number is"+$('#message7').val();
+      var text8 = " Your password is "+$('#message8').val();
+      var text9 = " Your id is"+$('#message9').val();
+      var msg = new SpeechSynthesisUtterance();
+      var voices = window.speechSynthesis.getVoices();
+      msg.voice = voices[$('#voices').val()];
+      //msg.rate = $('#rate').val() / 10;
+      //msg.pitch = $('#pitch').val();
+
+      msg.text = text+text1+text2+text3+text4+text5+text6+text7+text8+text9;
+
+      msg.onend = function(e) {
+        console.log('Finished in ' + event.elapsedTime + ' seconds.');
+      };
+
+      speechSynthesis.speak(msg);
+    })
+  } else {
+    $('#modal1').openModal();
+  }
+});
+</script>
